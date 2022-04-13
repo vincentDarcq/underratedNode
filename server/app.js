@@ -28,11 +28,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 mongoose.connect('mongodb+srv://underrated:' + pass.password + '@cluster0.51i9g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => {
-  console.log("connexion db OK !")
-}).catch(err => {
-  console.log(err);
-}
+  }).then(() => {
+    console.log("connexion db OK !")
+  }).catch(err => {
+    console.log(err);
+  }
 );
 
 app.use(index);

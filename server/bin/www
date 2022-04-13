@@ -14,4 +14,4 @@ const options = {
   cert: fs.readFileSync(env.cert),
 };
 
-const httpsServer = https.createServer(options, app).listen(env.portHttps);
+https.createServer(options, app).listen(env.portHttps);
