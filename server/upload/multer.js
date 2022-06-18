@@ -9,7 +9,8 @@ const storage = multer(
       filename: (req, file, cb) => {
         cb(null, Date.now() + '-' + file.originalname);
       }
-    })
+    }),
+    limits: { fieldSize: 10 * 1024 * 1024 } 
   });
 
 module.exports = storage;

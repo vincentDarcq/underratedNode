@@ -1,5 +1,5 @@
 const path = require('path');
-const img = path.join(__dirname, './images');
+const img = path.join(__dirname, './upload');
 const pass = require('./rsa/mongopass');
 const index = require('./routes/index');
 const cookieParser = require('cookie-parser');
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
-mongoose.connect('mongodb+srv://underrated:' + pass.password + '@cluster0.51i9g.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://underrated:' + pass.password + '@cluster0.51i9g.mongodb.net/Underrated?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
   }).then(() => {

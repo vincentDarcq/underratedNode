@@ -2,8 +2,11 @@ const { newService } = require('../models/service.model');
 const {
     findByIdAndUpdate,
     getService,
-    findAll
+    findAll,
+    deleteById
   } = require('../queries/service.queries');
+const util = require('util');
+const fs = require('fs');
 
 exports.create = async (req, res) => {
   const service = newService(req);
@@ -13,25 +16,31 @@ exports.create = async (req, res) => {
   });
 }
 
+exports.deleteById = async (req, res) => {
+  const service = await deleteById(req.query.id);
+  removeImage(service);
+  res.status(200).json(service);
+}
+
 exports.get = async (req, res) => {
   const services = await findAll();
   res.status(200).json(services);
 }
 
 exports.uploadImages = async (req, res) => {
-    util.inspect(req.files, { compact: false, depth: 5, breakLength: 80, color: true });
-    let upload = {};
-    const service = await getService(req.query.serviceId);
-    if (req.files.image) {
-      upload.image = req.files.image[0].filename;
-      if (service.image) {
-        fs.unlink(path.join(__dirname, `../upload/${service.image}`), err => {
-          if (err) throw err;
-        });
-      }
-    } else {
-      upload.image1 = event.image1;
-    }
-    const updatedService = await findByIdAndUpdate(req.query.eventId, upload);
-    res.status(200).json(updatedService);
+  util.inspect(req.file, { compact: false, depth: 5, breakLength: 80, color: true });
+  let service = await getService(req.query.id);
+  if (req.file.filename) {
+    service.image = req.file.filename;
+    service = await findByIdAndUpdate(req.query.id, service);
+    res.status(200).json(service);
+  }
+}
+
+removeImage = (service) => {
+  if (service.image) {
+    fs.unlink(path.join(__dirname, `../upload/${service.image}`), err => {
+      if (err) throw err;
+    });
+  }
 }

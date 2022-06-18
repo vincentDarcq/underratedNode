@@ -11,3 +11,7 @@ exports.findByIdAndUpdate = (id, service) => {
 exports.findAll = () => {
     return Service.find();
 }
+
+exports.deleteById = (id) => {
+    return Service.findByIdAndDelete(id).exec();
+}

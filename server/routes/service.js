@@ -1,14 +1,16 @@
-const storage = require('../upload/multer');
 const router = require('express').Router();
+const storage = require('../upload/multer');
 const {
     uploadImages,
     create,
-    get
+    get,
+    deleteById
   } = require('../controllers/service');
 
 
 router.post('/createService', create);
 router.get('/get', get);
-router.post('/uploadImages', storage.fields([{ name: 'image' }]), uploadImages)
+router.post('/uploadImage', storage.single('image'), uploadImages)
+router.get('/deleteService', deleteById);
 
 module.exports = router;
