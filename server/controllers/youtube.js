@@ -36,7 +36,7 @@ exports.pushVideo = async (req, res) => {
     const youtube = await findOne(req.query.artiste);
     res.status(200).json(youtube);
   }else {
-    res.status(200).json("fail to add video id");
+    res.status(200).json("fail to add video id to youtube artiste");
   }
 }
 
@@ -46,6 +46,6 @@ exports.pullVideo = async (req, res) => {
     const youtube = await findOne(req.query.artiste);
     res.status(200).json(youtube);
   }else {
-    res.status(200).json("fail to delete video id");
+    res.status(200).json("fail to delete video id from youtube artiste");
   }
 }

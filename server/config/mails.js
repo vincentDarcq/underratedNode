@@ -16,7 +16,7 @@ module.exports.sendMail = async (nom, mail, msg, response) => {
     const htmlToSend = '<div style="width: 700px">' + msg + '</div>'
   let message = {
     to: 'vincent.darcq@hotmail.fr',
-    from: 'Underrated <no_reply@eventmap.fr>',
+    from: 'Nderrated <no_reply@eventmap.fr>',
     subject: 'Message de ' + mail,
     html: htmlToSend,
     text: 'Hello Team! <br><br>Please find attached...<br><br>Thanks,<br>XXXXX'
