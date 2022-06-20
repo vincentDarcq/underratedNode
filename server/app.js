@@ -46,20 +46,4 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.get('/polyfills.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/polyfills.js'));
-});
-
-app.get('/polyfills.js.map', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/polyfills.js.map'));
-});
-
-app.get('/vendor.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/vendor.js'));
-});
-
-app.get('/vendor.js.map', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/vendor.js.map'));
-});
-
 module.exports = app;
