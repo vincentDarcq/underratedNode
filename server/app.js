@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, './upload')));
 
 mongoose.connect('mongodb+srv://underrated:' + pass.password + '@cluster0.51i9g.mongodb.net/Underrated?retryWrites=true&w=majority', {
   useNewUrlParser: true,
@@ -41,7 +42,7 @@ app.get('/upload?*', (req, res) => {
   res.sendFile(path.join(img, req.query.img));
 });
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
