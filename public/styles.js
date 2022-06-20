@@ -58,8 +58,8 @@ ___CSS_LOADER_EXPORT___.push([module.i, "", "",{"version":3,"sources":[],"names"
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/underrated/src/styles.scss */"+EN/");
-module.exports = __webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/underrated/node_modules/bootstrap/dist/css/bootstrap.min.css */"q4sD");
+__webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/nderrated/src/styles.scss */"+EN/");
+module.exports = __webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/nderrated/node_modules/bootstrap/dist/css/bootstrap.min.css */"q4sD");
 
 
 /***/ }),

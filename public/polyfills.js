@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/underrated/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/vincentdarcq/Documents/gitws/nderrated/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
