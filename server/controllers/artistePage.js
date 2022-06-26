@@ -1,3 +1,6 @@
+const util = require('util');
+const fs = require('fs');
+const path = require('path');
 const { 
     pushVideo,
     pullVideo,
@@ -9,7 +12,6 @@ const {
     getAllArtistes,
     findByIdAndUpdate
 } = require('../queries/artistePage.queries');
-const util = require('util');
 
 exports.findAll = async (req, res) => {
     const artistes = await getAllArtistes();
@@ -17,18 +19,25 @@ exports.findAll = async (req, res) => {
 }
 
 exports.modifier = async (req, res) => {
+    const oldArtistePage = await findOne(req.body.nom);
     const artistePage = await findByIdAndUpdate(req.body._id, req.body);
+    for(let pochette of oldArtistePage[0].pochettes){
+        if(artistePage.pochettes.indexOf(pochette) === -1){
+            removeImage(pochette);
+        }
+    }
     res.status(200).json(artistePage);
 }
 
 exports.addPhoto = async (req, res) => {
   util.inspect(req.file, { compact: false, depth: 5, breakLength: 80, color: true });
-  let artiste = await findOne(req.query.id);
-  if (req.file.filename) {
-    artiste.photo = req.file.filename;
-    artiste = await addPhoto(artiste._id, artiste);
-    res.status(200).json(artiste);
+  let artiste = await findOne(req.query.artiste);
+  if(artiste[0].photo){
+    removeImage(artiste[0].photo);
   }
+  artiste.photo = req.file.filename;
+  artiste = await addPhoto(artiste[0]._id, artiste);
+  res.status(200).json(artiste);
 }
 
 exports.deleteArtiste = async (req, res) => {
@@ -52,39 +61,18 @@ exports.addVideo = async (req, res) => {
     }
 }
 
-exports.deleteVideo = async (req, res) => {
-    const updated = await pullVideo(req.query.artiste, req.query.video);
-    if(updated.modifiedCount === 1){
-        const artistePage = await findOne(req.query.artiste);
-        res.status(200).json(artistePage);
-    }else {
-        res.status(200).json("fail to delete video to artistePage");
-    }
-}
-
 exports.addPochette = async (req, res) => {
     util.inspect(req.file, { compact: false, depth: 5, breakLength: 80, color: true });
-    let artiste = await findOne(req.query.id);
+    let artiste = await findOne(req.query.artiste);
     if (req.file.filename) {
-        const updated = await pushPochette(artiste.nom, req.file.filename);
+        const updated = await pushPochette(artiste[0].nom, req.file.filename);
         res.status(200).json(updated);
     }
 }
 
-exports.deletePochette = async (req, res) => {
-    const updated = await pullPochette(req.query.artiste, req.query.pochette);
-    if(updated.modifiedCount === 1){
-        const artistePage = await findOne(req.query.artiste);
-        res.status(200).json(artistePage);
-    }else {
-        res.status(200).json("fail to add album to artistePage");
-    }
-}
-
-
-removeImage = (artistePage) => {
-    if (artistePage.photo) {
-      fs.unlink(path.join(__dirname, `../upload/${artiste.photo}`), err => {
+removeImage = (image) => {
+    if (image) {
+      fs.unlink(path.join(__dirname, `../upload/${image}`), err => {
         if (err) throw err;
       });
     }

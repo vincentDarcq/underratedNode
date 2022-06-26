@@ -1,3 +1,5 @@
+const util = require('util');
+const path = require('path');
 const { newArtiste } = require('../models/artiste.model');
 const { 
   getArtiste,
@@ -5,7 +7,6 @@ const {
   getAllArtistes,
   deleteOne
 } = require('../queries/artiste.queries');
-const util = require('util');
 
 exports.findAll = async (req, res) => {
   const artistes = await getAllArtistes();

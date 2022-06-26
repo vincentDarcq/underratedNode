@@ -16,16 +16,8 @@ exports.pushVideo = (nom, video) => {
     return ArtistePage.updateOne({ nom: nom }, { $push: { videos: video } }).exec();
 }
 
-exports.pullVideo = (nom, video) => {
-    return ArtistePage.updateOne({ nom: nom }, { $pull: { videos: video } }).exec();
-}
-
 exports.pushPochette = (nom, pochette) => {
     return ArtistePage.updateOne({ nom: nom }, { $push: { pochettes: pochette } }).exec();
-}
-
-exports.pullPochette = (nom, pochette) => {
-    return ArtistePage.updateOne({ nom: nom }, { $pull: { pochettes: pochette } }).exec();
 }
 
 exports.deleteOne = (id) => {
@@ -33,7 +25,7 @@ exports.deleteOne = (id) => {
 }
 
 exports.addPhoto = (id, artiste) => {
-    return ArtistePage.findByIdAndUpdate({ _id: id }, { photo : artiste.photo }).exec();
+    return ArtistePage.findByIdAndUpdate({ _id: id }, { photo : artiste.photo }, {new: true}).exec();
 }
 
 exports.findByIdAndUpdate = (id, artiste) => {
