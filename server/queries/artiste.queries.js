@@ -10,7 +10,7 @@ exports.getArtiste = (id) => {
 
 exports.deleteOne = (artisteId) => {
     return Artiste.findByIdAndDelete(artisteId).exec();
-  }
+}
 
 exports.findByIdAndUpdate = (id, artiste) => {
     return Artiste.findByIdAndUpdate({ _id: id }, { photo : artiste.photo })

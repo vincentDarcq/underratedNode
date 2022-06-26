@@ -1,19 +1,26 @@
 const { newYoutube } = require('../models/youtube.model');
 const { 
-    getAllArtistes,
-    deleteOne,
-    pullVideo,
-    pushVideo,
-    findOne
-  } = require('../queries/youtube.queries');
+  getAllArtistes,
+  deleteOne,
+  pullVideo,
+  pushVideo,
+  findOne
+} = require('../queries/youtube.queries');
+const {
+  artistePageName
+} = require('../models/artistePage.model');
 
 exports.create = async (req, res) => {
   const youtube = await findOne(req.query.artiste);
   if(youtube.length == 0){
     const newYT = newYoutube(req);
+    const artistePage = artistePageName(req.query.artiste);
     newYT.save((err) => {
       if (err) { res.status(500).json(err) }
-      res.status(200).json(newYT);
+      artistePage.save((e) => {
+        if (e) { res.status(500).json(e) }
+        res.status(200).json(newYT);
+      })
     });
   }else {
     res.status(200).json("cet artiste exite déjà");
